@@ -105,7 +105,7 @@ class decoderBlock(nn.Module):
         self.up = False
         if up:
             self.up = True
-            self.up = nn.Sequential(nn.Upsample(scale_factor=(2,2,2),mode='trilinear'),
+            self.up = nn.Sequential(nn.Upsample(scale_factor=2.0,mode='trilinear'),
                                  sepConv3d(channelF, channelF//2, 3, (1,1,1),1,depthN,bias=False),
                                  nn.ReLU(inplace=True))
 

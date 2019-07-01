@@ -12,9 +12,14 @@ disparity map
 <img src="mboutput/CrusadeP-ent.png" width="400">
 uncertainty map (brighter->higher uncertainty)
 
+## FORK
+This is a fork of [https://github.com/gengshan-y/high-res-stereo](https://github.com/gengshan-y/high-res-stereo).
+The purpose is to convert this project to Python 3.7.x, PyTorch 1.1.0 and TorchVision 0.3.0
+
 ## Requirements
 - python 2.7.15
-- pytorch 0.4.0
+- pytorch 1.1.0 (older versions seem to be OK, 0.4.0, 0.4.1, 1.0.1 has been tested)
+- torchvision 0.2.0 (0.2.1 causes wrong result, 
 
 ## Weights
 [Download](https://drive.google.com/file/d/1BlH7IafX-X0A5kFPd50WkZXqxo0_gtoI/view?usp=sharing)
