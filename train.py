@@ -1,4 +1,4 @@
-from __future__ import print_function
+
 import pdb
 import argparse
 import os
@@ -44,7 +44,7 @@ model.cuda()
 # load model
 if args.loadmodel is not None:
     pretrained_dict = torch.load(args.loadmodel)
-    pretrained_dict['state_dict'] =  {k:v for k,v in pretrained_dict['state_dict'].items() if ('disp' not in k) }
+    pretrained_dict['state_dict'] =  {k:v for k,v in list(pretrained_dict['state_dict'].items()) if ('disp' not in k) }
     model.load_state_dict(pretrained_dict['state_dict'],strict=False)
 
 print('Number of model parameters: {}'.format(sum([p.data.nelement() for p in model.parameters()])))

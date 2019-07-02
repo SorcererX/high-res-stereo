@@ -1,4 +1,4 @@
-from __future__ import print_function
+
 import torch
 import torch.nn as nn
 import torch.utils.data
@@ -49,7 +49,7 @@ class projfeat3d(nn.Module):
         b,c,d,h,w = x.size()
         x = self.conv1(x.view(b,c,d,h*w))
         x = self.bn(x)
-        x = x.view(b,-1,d/self.stride[0],h,w)
+        x = x.view(b,-1,d//self.stride[0],h,w)
         return x
 
 # original conv3d block
@@ -69,7 +69,7 @@ class disparityregression(nn.Module):
         super(disparityregression, self).__init__()
         maxdisp = int(maxdisp/divisor)
         #self.disp = Variable(torch.Tensor(np.reshape(np.array(range(maxdisp)),[1,maxdisp,1,1])).cuda(), requires_grad=False)
-        self.register_buffer('disp',torch.Tensor(np.reshape(np.array(range(maxdisp)),[1,maxdisp,1,1])))
+        self.register_buffer('disp',torch.Tensor(np.reshape(np.array(list(range(maxdisp))),[1,maxdisp,1,1])))
         self.divisor = divisor
 
     def forward(self, x,ifent=False):
