@@ -1,3 +1,14 @@
+# Fork
+This is a fork of "Hierarchical Deep Stereo Matching on High Resolution Images" to support newer Python, PyTorch and TorchVision.
+
+The original implementation only works correctly with torchvision 0.2.0, and it is broken in 0.2.1.
+It can be found at [https://github.com/gengshan-y/high-res-stereo](https://github.com/gengshan-y/high-res-stereo).
+
+This implementation has been tested to work correctly with:
+- python 2.7.x, 3.7.x
+- PyTorch 0.4.0, 0.4.1, 1.0.1 and 1.1.0
+- torchvision 0.2.0, 0.2.1 and 0.3.0
+
 # Hierarchical Deep Stereo Matching on High Resolution Images
 Architecture:
 <img src="./architecture.png" width="800">
@@ -7,16 +18,6 @@ Qualitative results on Middlebury (refer to [project webpage](http://www.contrib
 
 Performance on Middlebury benchmark (y-axis: the lower the better)
 <img src="./middlebury-benchmark.png" width="400">
-
-
-## FORK
-This is a fork of [https://github.com/gengshan-y/high-res-stereo](https://github.com/gengshan-y/high-res-stereo).
-The purpose is to convert this project to Python 3.7.x, PyTorch 1.1.0 and TorchVision 0.3.0
-
-## Requirements
-- python 2.7.15
-- pytorch 1.1.0 (older versions seem to be OK, 0.4.0, 0.4.1, 1.0.1 has been tested)
-- torchvision 0.2.0 (0.2.1 causes wrong result, 
 
 ## Weights
 [Download](https://drive.google.com/file/d/1BlH7IafX-X0A5kFPd50WkZXqxo0_gtoI/view?usp=sharing)
