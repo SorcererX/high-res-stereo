@@ -27,7 +27,7 @@ def readPFM(file):
     else:
         dim_match = re.match(r'^(\d+)\s(\d+)\s$', file.readline())
     if dim_match:
-        width, height = map(int, dim_match.groups())
+        width, height = list(map(int, dim_match.groups()))
     else:
         raise Exception('Malformed PFM header.')
 

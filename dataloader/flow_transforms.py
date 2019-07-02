@@ -1,4 +1,4 @@
-from __future__ import division
+
 import torch
 import random
 import numpy as np

@@ -49,7 +49,7 @@ for level in levels:
         gt_depth = gt.copy()
         gt_depth[mask] = numr/gt_depth[mask]
         mask = mask*(gt_depth>level[0])*(gt_depth<level[1])
-        if imgname.split('/')[-1] in blist.keys():
+        if imgname.split('/')[-1] in list(blist.keys()):
             for b in blist[imgname.split('/')[-1]]:
                 mask[int(b[0][1]):int(b[1][1]),\
                      int(b[0][0]):int(b[1][0])] = 0
@@ -92,4 +92,4 @@ for level in levels:
 
     
 t.set_cols_align(['r','r','r','r','r','r','r'])
-print t.draw()
+print(t.draw())

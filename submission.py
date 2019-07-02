@@ -47,11 +47,11 @@ model.cuda()
 
 if args.loadmodel is not None:
     pretrained_dict = torch.load(args.loadmodel)
-    pretrained_dict['state_dict'] =  {k:v for k,v in pretrained_dict['state_dict'].items() if 'disp' not in k}
+    pretrained_dict['state_dict'] =  {k:v for k,v in list(pretrained_dict['state_dict'].items()) if 'disp' not in k}
     model.load_state_dict(pretrained_dict['state_dict'],strict=False)
 else:
     print('run with random init')
-print('Number of model parameters: {}'.format(sum([p.data.nelement() for p in model.parameters()])))
+print(('Number of model parameters: {}'.format(sum([p.data.nelement() for p in model.parameters()]))))
 
 # dry run
 multip = 48
@@ -67,7 +67,7 @@ def main():
     processed = get_transform()
     model.eval()
     for inx in range(len(test_left_img)):
-        print(test_left_img[inx])
+        print((test_left_img[inx]))
         imgL_o = (skimage.io.imread(test_left_img[inx]).astype('float32'))[:,:,:3]
         imgR_o = (skimage.io.imread(test_right_img[inx]).astype('float32'))[:,:,:3]
         imgsize = imgL_o.shape[:2]
@@ -90,11 +90,12 @@ def main():
         model.module.disp_reg16 = disparityregression(model.module.maxdisp,16).cuda()
         model.module.disp_reg32 = disparityregression(model.module.maxdisp,32).cuda()
         model.module.disp_reg64 = disparityregression(model.module.maxdisp,64).cuda()
-        print(model.module.maxdisp)
+        print((model.module.maxdisp))
         
         # resize
         imgL_o = cv2.resize(imgL_o,None,fx=args.testres,fy=args.testres,interpolation=cv2.INTER_CUBIC)
         imgR_o = cv2.resize(imgR_o,None,fx=args.testres,fy=args.testres,interpolation=cv2.INTER_CUBIC)
+
         imgL = processed(imgL_o).numpy()
         imgR = processed(imgR_o).numpy()
 
@@ -120,7 +121,7 @@ def main():
             start_time = time.time()
             pred_disp,entropy = model(imgL,imgR)
             torch.cuda.synchronize()
-            ttime = (time.time() - start_time); print('time = %.2f' % (ttime*1000) )
+            ttime = (time.time() - start_time); print(('time = %.2f' % (ttime*1000) ))
         pred_disp = torch.squeeze(pred_disp).data.cpu().numpy()
 
         top_pad   = max_h-imgL_o.shape[0]
